@@ -1,10 +1,10 @@
 package com.arifsyncjava.restfulapi.movie.controller;
 
-import com.arifsyncjava.restfulapi.response.Response;
 import com.arifsyncjava.restfulapi.movie.request.MovieSearchRequest;
 import com.arifsyncjava.restfulapi.movie.request.MovieSortRequest;
 import com.arifsyncjava.restfulapi.movie.service.MovieSortService;
 import com.arifsyncjava.restfulapi.movie.service.SearchMovieByNameService;
+import com.arifsyncjava.restfulapi.response.Response;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;

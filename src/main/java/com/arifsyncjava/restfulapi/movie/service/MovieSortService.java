@@ -3,11 +3,12 @@ package com.arifsyncjava.restfulapi.movie.service;
 import com.arifsyncjava.restfulapi.Query;
 import com.arifsyncjava.restfulapi.exception.ErrorMessage;
 import com.arifsyncjava.restfulapi.movie.execptions.InvalidArgumentException;
-import com.arifsyncjava.restfulapi.movie.utils.RequestValidator;
-import com.arifsyncjava.restfulapi.response.Response;
 import com.arifsyncjava.restfulapi.movie.persistence.MovieRepository;
 import com.arifsyncjava.restfulapi.movie.request.MovieSortRequest;
 import com.arifsyncjava.restfulapi.movie.response.MovieSortResponse;
+import com.arifsyncjava.restfulapi.movie.utils.RequestValidator;
+import com.arifsyncjava.restfulapi.response.Data;
+import com.arifsyncjava.restfulapi.response.Response;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -29,8 +30,11 @@ public class MovieSortService implements Query<MovieSortRequest, Response> {
         List<MovieSortResponse> response = movieRepository.sortMovie(request);
         if (response.isEmpty())
             throw new InvalidArgumentException(ErrorMessage.YEAR_NOT_AVAILABLE.getMessage());
+
+        var data = new Data(HttpStatus.OK,"Successful",Map.of("movies", response));
+
         return ResponseEntity
                 .status(HttpStatus.OK)
-                .body(new Response(Map.of("movies", response)));
+                .body(Response.of(data));
     }
 }
